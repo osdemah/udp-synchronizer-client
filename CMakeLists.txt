@@ -3,7 +3,7 @@ project(ZaeimCo_Client)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-set(SOURCE_FILES main.cpp)
+set(SOURCE_FILES main.cpp UDPClient.cpp UDPClient.h Utils.cpp Utils.h)
 
 find_package(Boost COMPONENTS system filesystem thread REQUIRED)
 include_directories(${Boost_INCLUDE_DIR})
