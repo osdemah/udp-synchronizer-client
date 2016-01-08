@@ -9,11 +9,9 @@
 #include <string>
 #include <iostream>
 
-class Utils {
-public:
+namespace utils {
     static int print_usage();
-
     static std::string get_parameter(char *argv);
-};
+}
 
 #endif //ZAEIMCO_CLIENT_UTILS_H
