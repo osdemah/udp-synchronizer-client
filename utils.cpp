@@ -9,6 +9,11 @@ int utils::print_usage(){
     return 1;
 }
 
+bool utils::check_operation(std::string operation) {
+    return operation.compare("CREATE_FILE") == 0 || operation.compare("CREATE_DIR") == 0 ||
+        operation.compare("REMOVE_FILE") == 0 || operation.compare("REMOVE_DIR") == 0;
+}
+
 std::string utils::get_parameter(char *argv) {
     std::string output;
     std::istringstream iss( argv );

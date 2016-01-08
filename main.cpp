@@ -17,7 +17,7 @@ int main(int argc, char *argv[]) {
         std::string operation = utils::get_parameter(argv[3]);
         std::string filename = utils::get_parameter(argv[4]);
 
-        if(port.empty() || host.empty() || operation.empty())
+        if(port.empty() || host.empty() || operation.empty() || filename.empty() || !utils::check_operation(operation))
             return utils::print_usage();
 
         std::string message;
