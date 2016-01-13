@@ -23,19 +23,13 @@ int main(int argc, char *argv[]) {
         if (port.empty() || host.empty() || operation.empty() || filename.empty() || !utils::check_operation(operation))
             return utils::print_usage();
 
+        boost::asio::io_service io_service;
+        UDPClient client{io_service, host, port};
+
         path p{filename};
 
         if(exists(p) && ((utils::contains(operation, "FILE") && is_regular_file(p)) ||
                     (utils::contains(operation, "DIR") && is_directory(p)))) {
-            std::string message = operation + ";" + filename;
-            std::string hash = utils::hash_message(message);
-            message = hash + ";" + "OP" + ";" + message;
-
-            boost::asio::io_service io_service;
-            UDPClient client{io_service, host, port};
-            client.send_message(message);
-            std::cout << "message sent" << std::endl;
-
             if (operation.compare("CREATE_FILE") == 0) {
                 std::ifstream file (filename, std::ios::in|std::ios::binary|std::ios::ate);
                 if (file.is_open())
@@ -65,6 +59,12 @@ int main(int argc, char *argv[]) {
                     delete[] buffer;
                     std::cout << "all chunks sent!" << std::endl;
                 }
+            }else{
+                std::string message = operation + ";" + filename;
+                std::string hash = utils::hash_message(message);
+                message = hash + ";" + "OP" + ";" + message;
+                client.send_message(message);
+                std::cout << "message sent" << std::endl;
             }
         }else{
             std::cout << "no such file or directory!" << std::endl;
