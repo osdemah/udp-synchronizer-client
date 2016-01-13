@@ -13,6 +13,7 @@ namespace utils {
     int print_usage();
     std::string get_parameter(char *argv);
     bool check_operation(std::string operation);
+    std::string hash_message(std::string message);
 }
 
 #endif //ZAEIMCO_CLIENT_UTILS_H

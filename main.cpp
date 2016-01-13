@@ -21,9 +21,11 @@ int main(int argc, char *argv[]) {
             return utils::print_usage();
 
         std::string message;
-        if(operation != "CREATE_FILE")
+        if(operation != "CREATE_FILE") {
             message = operation + ";;" + filename;
-        else {
+            std::string hash = utils::hash_message(message);
+            message = hash + ";;" + message;
+        }else {
             std::cerr << "NOT SUPPORT YET!" << std::endl;
             return utils::print_usage();
         }

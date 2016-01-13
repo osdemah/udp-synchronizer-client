@@ -4,6 +4,8 @@
 
 #include "utils.h"
 
+#include <boost/functional/hash.hpp>
+
 int utils::print_usage(){
     std::cerr << "Usage: client <host> <port> <CREATE_FILE|CREATE_DIR|REMOVE_FILE|REMOVE_DIR> <file/dir>" << std::endl;
     return 1;
@@ -22,4 +24,8 @@ std::string utils::get_parameter(char *argv) {
         return "";
     }
     return output;
+}
+
+std::string utils::hash_message(std::string message) {
+    return std::to_string(std::hash<std::string>()(message));
 }
