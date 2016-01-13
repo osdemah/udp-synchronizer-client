@@ -39,3 +39,7 @@ std::string utils::hash_message(std::string message) {
         return h;
     }
 }
+
+bool utils::contains(std::string text, std::string q) {
+    return text.find(q) != std::string::npos;
+}
