@@ -9,6 +9,8 @@
 using namespace boost::filesystem;
 using boost::asio::ip::udp;
 
+const int CHUNK_SIZE = 512;
+
 int main(int argc, char *argv[]) {
     try {
         if (argc != 5) {
@@ -36,14 +38,14 @@ int main(int argc, char *argv[]) {
                 {
                     std::cout << "sending chunks of file" << std::endl;
                     unsigned long size = file.tellg();
-                    char * buffer = new char[512];
+                    char * buffer = new char[CHUNK_SIZE];
                     unsigned long pos = 0;
-                    for(unsigned long i = 0; i < size / 512 + 1; i ++){
+                    for(unsigned long i = 0; i < size / CHUNK_SIZE + 1; i ++){
                         std::string content;
-                        if(i != size / 512) {
+                        if(i != size / CHUNK_SIZE) {
                             file.seekg(pos, std::ios::beg);
-                            file.read(buffer, 512);
-                            content = std::string{buffer, 512};
+                            file.read(buffer, CHUNK_SIZE);
+                            content = std::string{buffer, CHUNK_SIZE};
                         }else{
                             int s = static_cast<int>(size - pos);
                             file.read(buffer, s);
@@ -54,7 +56,7 @@ int main(int argc, char *argv[]) {
                         std::string message = hash_code + ";" + "CH;" + bare_message;
                         client.send_message(message);
                         std::cout << "#" << i << " chunk!" << std::endl;
-                        pos += 512;
+                        pos += CHUNK_SIZE;
                     }
                     file.close();
                     delete[] buffer;
