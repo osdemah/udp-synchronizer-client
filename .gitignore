@@ -4,3 +4,5 @@
 /Makefile
 /ZaeimCo_Client
 .idea/
+.cproject
+.project

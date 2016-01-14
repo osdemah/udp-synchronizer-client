@@ -43,13 +43,12 @@ int main(int argc, char *argv[]) {
                         if(i != size / 512) {
                             file.seekg(pos, std::ios::beg);
                             file.read(buffer, 512);
-                            content = std::string{buffer};
+                            content = std::string{buffer, 512};
                         }else{
                             int s = static_cast<int>(size - pos);
                             file.read(buffer, s);
                             content = std::string{buffer, s};
                         }
-                        std::cout << content << std::endl;
                         std::string bare_message = filename + ";" + std::to_string(pos) + ";" + content;
                         std::string hash_code = utils::hash_message(bare_message);
                         std::string message = hash_code + ";" + "CH;" + bare_message;
