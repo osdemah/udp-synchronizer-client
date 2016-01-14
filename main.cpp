@@ -9,7 +9,7 @@
 using namespace boost::filesystem;
 using boost::asio::ip::udp;
 
-const int CHUNK_SIZE = 512;
+const int CHUNK_SIZE = 1024;
 
 int main(int argc, char *argv[]) {
     try {
