@@ -21,7 +21,7 @@ example:
 
     ./udp_synchronizer_client 192.168.124.167 8000 CREATE_FILE ~/Pictures/screenshot1.jpg
 
-### contact information
+## contact information
 
 * @hamed1soleimani
 * hamed1soleimani@gmail.com
