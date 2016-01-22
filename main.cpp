@@ -5,6 +5,8 @@
 
 #include <boost/filesystem.hpp>
 #include <fstream>
+#include <chrono>
+#include <thread>
 
 using namespace boost::filesystem;
 using boost::asio::ip::udp;
@@ -57,6 +59,7 @@ int main(int argc, char *argv[]) {
                         client.send_message(message);
                         std::cout << "#" << i << " chunk!" << std::endl;
                         pos += CHUNK_SIZE;
+                        std::this_thread::sleep_for(std::chrono::milliseconds(1));
                     }
                     file.close();
                     delete[] buffer;
