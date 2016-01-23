@@ -15,14 +15,17 @@ const int CHUNK_SIZE = 1024;
 
 int main(int argc, char *argv[]) {
     try {
-        if (argc != 5) {
+        if (argc != 5 && argc != 6) {
             return utils::print_usage();
         }
 
-        std::string port = utils::get_parameter(argv[2]);
-        std::string host = utils::get_parameter(argv[1]);
-        std::string operation = utils::get_parameter(argv[3]);
-        std::string filename = utils::get_parameter(argv[4]);
+        std::string port{argv[2]};
+        std::string host{argv[1]};
+        std::string operation{argv[3]};
+        std::string filename{argv[4]};
+        int sleep_between_chunks = 300;
+        if(argc == 6)
+            sleep_between_chunks = atoi(argv[5]);
 
         if (port.empty() || host.empty() || operation.empty() || filename.empty() || !utils::check_operation(operation))
             return utils::print_usage();
@@ -59,7 +62,7 @@ int main(int argc, char *argv[]) {
                         client.send_message(message);
                         std::cout << "#" << i << " chunk!" << std::endl;
                         pos += CHUNK_SIZE;
-                        std::this_thread::sleep_for(std::chrono::milliseconds(1));
+                        std::this_thread::sleep_for(std::chrono::nanoseconds(sleep_between_chunks));
                     }
                     file.close();
                     delete[] buffer;

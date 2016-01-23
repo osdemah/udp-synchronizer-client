@@ -11,7 +11,6 @@
 
 namespace utils {
     int print_usage();
-    std::string get_parameter(char *argv);
     bool check_operation(std::string operation);
     bool contains(std::string text, std::string q);
     std::string hash_message(std::string message);
