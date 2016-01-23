@@ -16,10 +16,11 @@ to send orders from client to server you should provide following arguments:
 * port number
 * event name (any of CREATE_FILE, CREATE_DIR, REMOVE_FILE, REMOVE_DIR)
 * file/folder name
+* sleep time between sending each chunk files in us(optional, default=300us)
 
 example:
 
-    ./udp_synchronizer_client 192.168.124.167 8000 CREATE_FILE ~/Pictures/screenshot1.jpg
+    ./udp_synchronizer_client 192.168.124.167 8000 CREATE_FILE ~/Pictures/screenshot1.jpg 400
 
 ## contact information
 
