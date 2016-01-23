@@ -61,7 +61,7 @@ int main(int argc, char *argv[]) {
                         std::string message = hash_code + ";" + "CH;" + bare_message;
                         client.send_message(message);
                         pos += CHUNK_SIZE;
-                        std::this_thread::sleep_for(std::chrono::nanoseconds(sleep_between_chunks));
+                        std::this_thread::sleep_for(std::chrono::microseconds(sleep_between_chunks));
                     }
                     file.close();
                     delete[] buffer;
