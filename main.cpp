@@ -60,7 +60,6 @@ int main(int argc, char *argv[]) {
                         std::string hash_code = utils::hash_message(bare_message);
                         std::string message = hash_code + ";" + "CH;" + bare_message;
                         client.send_message(message);
-                        std::cout << "#" << i << " chunk!" << std::endl;
                         pos += CHUNK_SIZE;
                         std::this_thread::sleep_for(std::chrono::nanoseconds(sleep_between_chunks));
                     }
